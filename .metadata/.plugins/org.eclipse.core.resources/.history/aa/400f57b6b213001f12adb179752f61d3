@@ -1,0 +1,77 @@
+import java.util.Scanner;
+
+public class Ass1_Q2 {
+    public static boolean isPar(String x) {
+    	StackUsingLinkedList obj = new StackUsingLinkedList();
+        char a;
+        for (int i = 0; i < x.length(); i++) {
+            if (x.charAt(i) == '{' || x.charAt(i) == '[' || x.charAt(i) == '(') {
+                obj.push(x.charAt(i));
+            } else {
+                if (obj.empty()) {
+                    return false;
+                }
+                switch (x.charAt(i)) {
+                    case '}':
+                        a = obj.pop();
+                        if (a == '[' || a == '(') {
+                            return false;
+                        }
+                        break;
+                    case ']':
+                        a = obj.pop();
+                        if (a == '{' || a == '(') {
+                            return false;
+                        }
+                        break;
+                    case ')':
+                        a = obj.pop();
+                        if (a == '{' || a == '[') {
+                            return false;
+                        }
+                        break;
+                }
+            }
+        }
+        return obj.empty();
+    }
+
+    public static void main(String[] args) {
+        String testString = "{[()]}";
+        System.out.println(isPar(testString)); // Output: true
+
+        String testString2 = "{[()]";
+        System.out.println(isPar(testString2)); // Output: false
+        
+        // Creates scannerObj object
+  	   Scanner scannerObj = new Scanner(System.in);
+  	  // Creating object on heap memory 
+        Ass1_Q2 queElements = new Ass1_Q2();
+        // To store user menu choice
+        
+        String combination="()";
+        
+        System.out.println("Hi, welcome to Paranthesis Testing! (space or empty to exit)");
+        
+        while(true) {
+        	// Display message to user
+            System.out.println("Enter String:");
+            
+            // Get user choice
+            combination = scannerObj.nextLine();
+            
+            if (combination==" "|| combination=="") {
+            	break; 
+            }
+            
+            System.out.println(isPar(combination));
+        }
+        
+        
+        
+        // Clear memory leakages
+        scannerObj.close();
+    
+  }
+}
+

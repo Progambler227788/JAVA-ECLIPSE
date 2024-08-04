@@ -1,0 +1,93 @@
+import java.util.Scanner;
+
+
+// Class to test brackets combination
+public class Ass1_Q2 {
+    public static boolean isPar(String x) {
+    	// Create stack object on heap memory
+    	StackUsingLinkedList obj = new StackUsingLinkedList();
+    	// Function to store popped character from stack
+        char a;
+        // Loop until string length
+        for (int i = 0; i <= x.length()-1; i++) {
+        	// If there is left bracket, push it to stack
+            if (x.charAt(i) == '{' || x.charAt(i) == '[' || x.charAt(i) == '(') {
+                obj.push(x.charAt(i));
+            }
+            
+            else {
+            	// If stack is empty, it means there are only right brackets (no left)
+                if (obj.empty()) {
+                    return false;
+                }
+                // Check bracket pair
+                switch (x.charAt(i)) {
+                // If there is right curly bracket, then check top of stack bracket
+                    case '}':
+                        a = obj.pop();
+                        // Opposite bracket so wrong combination
+                        if (a == '[' || a == '(') {
+                            return false;
+                        }
+                        break;
+                    case ']':
+                        a = obj.pop();
+                        if (a == '{' || a == '(') {
+                            return false;
+                        }
+                        break;
+                    case ')':
+                        a = obj.pop();
+                        if (a == '{' || a == '[') {
+                            return false;
+                        }
+                        break;
+                }
+            }
+        }
+        return obj.empty();
+    }
+
+    public static void main(String[] args) {
+        String testString = "{[()]}";
+        System.out.println(isPar(testString)); // Output: true
+
+        String testString2 = "{[()]";
+        System.out.println(isPar(testString2)); // Output: false
+        
+        // Creates scannerObj object
+  	   Scanner scannerObj = new Scanner(System.in);
+  	  // Creating object on heap memory 
+        Ass1_Q2 queElements = new Ass1_Q2();
+        // To store user menu choice
+        
+        String combination="()";
+        
+        System.out.println("Hi, welcome to Paranthesis Testing! (space or empty to exit)");
+        
+        while(true) {
+        	// Display message to user
+            System.out.println("Enter String:");
+            
+            // Get user choice
+            combination = scannerObj.nextLine();
+            
+            if (combination==" "|| combination=="") {
+            	break; 
+            }
+            
+            System.out.println(isPar(combination));
+        }
+        
+        
+        
+        // Clear memory leakages
+        scannerObj.close();
+        
+        System.out.println("Thanks for using. Exited!! (:");
+        
+        
+    
+  }
+}
+

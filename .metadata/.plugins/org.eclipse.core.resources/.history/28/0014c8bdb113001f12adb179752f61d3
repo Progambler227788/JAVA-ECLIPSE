@@ -1,0 +1,112 @@
+import java.util.Scanner;
+
+public class Ass1_Q2 {
+    public static boolean isPar(String x) {
+    	StackUsingLinkedList obj = new StackUsingLinkedList();
+        char a;
+        for (int i = 0; i < x.length(); i++) {
+            if (x.charAt(i) == '{' || x.charAt(i) == '[' || x.charAt(i) == '(') {
+                obj.push(x.charAt(i));
+            } else {
+                if (obj.empty()) {
+                    return false;
+                }
+                switch (x.charAt(i)) {
+                    case '}':
+                        a = obj.pop();
+                        if (a == '[' || a == '(') {
+                            return false;
+                        }
+                        break;
+                    case ']':
+                        a = obj.pop();
+                        if (a == '{' || a == '(') {
+                            return false;
+                        }
+                        break;
+                    case ')':
+                        a = obj.pop();
+                        if (a == '{' || a == '[') {
+                            return false;
+                        }
+                        break;
+                }
+            }
+        }
+        return obj.empty();
+    }
+
+    public static void main(String[] args) {
+        String testString = "{[()]}";
+        System.out.println(isPar(testString)); // Output: true
+
+        String testString2 = "{[()]";
+        System.out.println(isPar(testString2)); // Output: false
+        
+        // Creates scannerObj object
+  	  Scanner scannerObj = new Scanner(System.in);
+  	  // Creating object on heap memory 
+        Ass1_Q2 queElements = new Ass1_Q2();
+        // To store user menu choice
+        
+        String combination;
+        
+        // Get user choice
+        combination = scannerObj.nextLine();
+        do {
+      	  // Display information of menu to console screen
+            System.out.println("\nWelcome !!! Que Menu:");
+            System.out.println("Enter String:");
+            System.out.println("Press 2. -> Dequeue the Element");
+            System.out.println("Press 3. -> Get Minimum from Que");
+            System.out.println("Press 4. -> Print Que Elements");
+            System.out.println("Press 5. -> Exit from our Program (:");
+            System.out.print("Hey there, Please Enter your choice: ");
+            
+           
+
+            switch (choice) {
+            // Add element to que using enque operation
+                case 1:
+                    System.out.print("Enter element to enqueue: ");
+                    int element = scannerObj.nextInt();
+                    queElements.enQueue(element);
+                    System.out.println("Element enqueued successfully.");
+                    break;
+           // Delete element to que using deque operation
+                case 2:
+                    try {
+                        queElements.deQueue();
+                        System.out.println("Element dequeued successfully.");
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+                    break;
+            // Print smallest element from getmin() function
+                case 3:
+                    try {
+                        System.out.println("Smallest Element of Que: " + queElements.getmin());
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+                    break;
+                    
+                case 4:
+              	  System.out.println("Elements given below: ");
+              	  System.out.println(queElements.toString());
+                    break;
+                case 5:
+                    System.out.println("Thank you for using!!! Exiting...");
+                    break;
+                default:
+                    System.out.println("Ooops!!! Invalid choice. Try again!!!. ->>>> Please enter a valid option.");
+            }
+
+        } while (choice != 5); // Iterate til choice is not 4
+        
+        // Clear memory leakages
+        scannerObj.close();
+    
+  }
+    }
+}

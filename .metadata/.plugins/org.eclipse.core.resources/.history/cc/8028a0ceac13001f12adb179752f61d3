@@ -1,0 +1,37 @@
+// Linked List class
+public class LinkedList {
+    // Data members
+    public LinkedList nextPointer;
+    public int data;
+
+    // A constructor function to create empty node
+    public LinkedList (int data){
+        nextPointer = null; // assign null as by default it will be last node
+        this.data = data;   // Assign data 
+    }
+
+    // Get next node for a node that calls this function
+    public LinkedList getNext(){
+         return nextPointer;
+    }
+
+    // This piece of code will set next pointer for a node that will call this function
+    public void setNext (LinkedList node){
+         nextPointer = node;
+    }
+
+    // This function will return data for a node
+    public int getData(){
+          return data;
+    }
+
+    // Set data of a node
+    public void setdata (int storageData){
+         data = storageData;
+    }
+ 
+    // Sets the data stored in this node.
+    public String toString (){
+        return Integer.toString(data);
+    } 
+} 

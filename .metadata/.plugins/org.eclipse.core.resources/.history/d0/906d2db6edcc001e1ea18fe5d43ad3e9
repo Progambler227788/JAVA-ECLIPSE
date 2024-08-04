@@ -1,0 +1,75 @@
+package telephony;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JButton;
+import java.awt.BorderLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class Main {
+
+	private JFrame frame;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Main window = new Main();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public Main() {
+		initialize();
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 450, 300);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		
+		JButton btnSubscriber = new JButton("Subscriber");
+		btnSubscriber.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				 // Display an input dialog to prompt the user for their phone number
+		        String phoneNumber = JOptionPane.showInputDialog(null, "Please enter your phone number:");
+
+		        // Check if the user entered a phone number
+		        if (phoneNumber != null && !phoneNumber.isEmpty()) {
+		            // Process the entered phone number (e.g., validate, store, etc.)
+		            // For now, let's just print it to the console
+		            System.out.println("Entered phone number: " + phoneNumber);
+		        } else {
+		            // Handle the case where the user canceled the input dialog or entered an empty string
+		            System.out.println("No phone number entered or dialog canceled.");
+		        }
+			}
+		});
+		btnSubscriber.setBounds(123, 11, 132, 61);
+		frame.getContentPane().add(btnSubscriber);
+		
+		JButton btnAdminstrator = new JButton("Adminstrator");
+		btnAdminstrator.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnAdminstrator.setBounds(123, 120, 132, 61);
+		frame.getContentPane().add(btnAdminstrator);
+	}
+}

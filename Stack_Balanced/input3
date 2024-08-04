@@ -1,0 +1,12 @@
+import java.util.Properties;
+/*
+ * }}} This is a comment {{{
+ */
+public class HelloWorldClass {
+	public static void main(String[] args) {
+		// This is also a comment
+		System.out.println("Hello World !");
+		Properties jvm = System.getProperties();
+		jvm.list(System.out);
+	}
+}

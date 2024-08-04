@@ -1,0 +1,111 @@
+package telephony;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+
+public class SubscriberEnd extends JFrame {
+
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					SubscriberEnd frame = new SubscriberEnd();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public SubscriberEnd() {
+		setTitle("SubscriberPage");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Enter Call Minutes:");
+		lblNewLabel.setFont(new Font("Stencil", Font.PLAIN, 14));
+		lblNewLabel.setBounds(10, 11, 161, 14);
+		contentPane.add(lblNewLabel);
+		
+		JLabel lblEnterTopUp = new JLabel("Enter Top Up Balance:");
+		lblEnterTopUp.setFont(new Font("Stencil", Font.PLAIN, 14));
+		lblEnterTopUp.setBounds(10, 45, 161, 14);
+		contentPane.add(lblEnterTopUp);
+		
+		JLabel lblEnterKbFor = new JLabel("Enter KiloBytes:");
+		lblEnterKbFor.setFont(new Font("Stencil", Font.PLAIN, 14));
+		lblEnterKbFor.setBounds(10, 83, 175, 14);
+		contentPane.add(lblEnterKbFor);
+		
+		JLabel lblSelectTariffPlan = new JLabel("Select Tariff Plan:");
+		lblSelectTariffPlan.setFont(new Font("Stencil", Font.PLAIN, 14));
+		lblSelectTariffPlan.setBounds(10, 121, 175, 14);
+		contentPane.add(lblSelectTariffPlan);
+		
+		textField = new JTextField();
+		textField.setColumns(10);
+		textField.setBounds(181, 77, 96, 20);
+		contentPane.add(textField);
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(181, 39, 96, 20);
+		contentPane.add(textField_1);
+		
+		textField_2 = new JTextField();
+		textField_2.setColumns(10);
+		textField_2.setBounds(181, 5, 96, 20);
+		contentPane.add(textField_2);
+		
+		JButton btnDataConnection = new JButton("Data Connection");
+		btnDataConnection.setBounds(297, 73, 115, 23);
+		contentPane.add(btnDataConnection);
+		
+		JButton btnTopUp = new JButton("Top Up ");
+		btnTopUp.setBounds(297, 39, 115, 23);
+		contentPane.add(btnTopUp);
+		
+		JButton btnMakeACall = new JButton("Make a Call");
+		btnMakeACall.setBounds(297, 5, 115, 23);
+		contentPane.add(btnMakeACall);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setBounds(177, 121, 89, 22);
+		contentPane.add(comboBox);
+		
+		JButton btnSendMessage = new JButton("Send Message");
+		btnSendMessage.setBounds(20, 179, 115, 23);
+		contentPane.add(btnSendMessage);
+		
+		JButton btnNewButton = new JButton("Show Balance");
+		btnNewButton.setBounds(222, 179, 115, 23);
+		contentPane.add(btnNewButton);
+	}
+
+}

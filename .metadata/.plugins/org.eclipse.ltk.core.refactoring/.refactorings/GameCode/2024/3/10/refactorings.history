@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 3 elements to &apos;GameCode/handout/src&apos;&#x0D;&#x0A;- Original project: &apos;GameCode&apos;&#x0D;&#x0A;- Destination element: &apos;GameCode/handout/src&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     sounds&#x0D;&#x0A;     images&#x0D;&#x0A;     maps" description="Copy folders" destination="/handout\/src" element1="handout/sounds" element2="handout/images" element3="handout/maps" files="0" flags="589830" folders="3" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1709579788831" units="0" version="1.0"/>
+</session>

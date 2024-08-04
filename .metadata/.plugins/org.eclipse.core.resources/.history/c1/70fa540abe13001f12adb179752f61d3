@@ -1,0 +1,11 @@
+
+// Class to hold nodes
+public class TreeNode {
+    String key;
+    TreeNode left, right;
+
+    public TreeNode(String item) {
+        key = item;
+        left = right = null;
+    }
+}

@@ -1,0 +1,59 @@
+import java.util.Scanner;
+
+// Class to test functionality of BST with Commands
+public class Driver {
+    public static void main(String[] args) {
+        BinarySearchTree bst = new BinarySearchTree();
+        Scanner scanner = new Scanner(System.in);
+        String command;
+
+        do {
+            System.out.println("Enter command (emptyTest, insert <key>, count, height, treePrint, levelPrint, delete <key>, stop): ");
+            command = scanner.next();
+
+            switch (command) {
+                case "emptyTest":
+                    if (bst.root == null)
+                        System.out.println("The tree is empty.");
+                    else
+                        System.out.println("The tree is not empty.");
+                    break;
+                case "insert":
+                    String key = scanner.next();
+                    bst.insert(key);
+                    System.out.println("\"" + key + "\" has been placed in the tree.");
+                    break;
+                case "count":
+                    System.out.println("The tree contains " + bst.count() + " elements.");
+                    break;
+                case "height":
+                    System.out.println("The height of the tree is: " + bst.height());
+                    break;
+                case "treePrint":
+                    System.out.println("The tree looks like this:");
+                    bst.treePrint();
+                    break;
+                case "levelPrint":
+                    System.out.println("The levels of the tree look like this:");
+                    bst.levelPrint();
+                    break;
+                case "delete":
+                    String keyToDelete = scanner.next();
+                    // Implement delete operation
+                    bst.delete(keyToDelete);
+                    System.out.println("\"" + keyToDelete + "\" has been removed from the tree.");
+                    break;
+                case "stop":
+                    System.out.println("All done. Goodbye.");
+                    break;
+                default:
+                    System.out.println("Invalid command. Please enter a valid command.");
+                    break;
+            }
+
+        } while (!command.equals("stop"));
+
+        scanner.close();
+    }
+}
+

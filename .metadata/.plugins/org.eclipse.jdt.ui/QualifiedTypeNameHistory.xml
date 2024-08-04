@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="org.json.JSONObject"/>
+    <fullyQualifiedTypeName name="java.io.FileWriter"/>
+    <fullyQualifiedTypeName name="com.fasterxml.jackson.databind.SerializationFeature"/>
+    <fullyQualifiedTypeName name="com.fasterxml.jackson.databind.ObjectWriter"/>
+    <fullyQualifiedTypeName name="java.util.concurrent.Flow.Subscriber"/>
+    <fullyQualifiedTypeName name="users.Subscriber"/>
+    <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
+    <fullyQualifiedTypeName name="users.Administrator"/>
+    <fullyQualifiedTypeName name="strategypattern.PaymentStrategy"/>
+    <fullyQualifiedTypeName name="javax.swing.table.DefaultTableModel"/>
+    <fullyQualifiedTypeName name="java.util.Map"/>
+</qualifiedTypeNameHistroy>

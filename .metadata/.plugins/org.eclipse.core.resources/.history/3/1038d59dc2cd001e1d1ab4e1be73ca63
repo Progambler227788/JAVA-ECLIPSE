@@ -1,0 +1,163 @@
+package userinterface;
+
+import java.awt.EventQueue;
+import users.*;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+import java.awt.Font;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import java.awt.event.ActionListener;
+import java.util.Map;
+import java.awt.event.ActionEvent;
+
+public class UIAddSubscriber extends JFrame {
+
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+	private JTextField nameTextBox;
+	private JTextField surNameTextBox;
+	private JTextField residenceTextBox;
+	private JTextField phoneNumberTextBox;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					UIAddSubscriber frame = new UIAddSubscriber();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public UIAddSubscriber() {
+		setTitle("Add Subscriber");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblEnterName = new JLabel("Enter Name:");
+		lblEnterName.setFont(new Font("Stencil", Font.PLAIN, 14));
+		lblEnterName.setBounds(10, 27, 161, 14);
+		contentPane.add(lblEnterName);
+		
+		nameTextBox = new JTextField();
+		nameTextBox.setColumns(10);
+		nameTextBox.setBounds(181, 21, 96, 20);
+		contentPane.add(nameTextBox);
+		
+		JLabel lblEnterSurName = new JLabel("Enter Sur Name:");
+		lblEnterSurName.setFont(new Font("Stencil", Font.PLAIN, 14));
+		lblEnterSurName.setBounds(10, 61, 161, 14);
+		contentPane.add(lblEnterSurName);
+		
+		surNameTextBox = new JTextField();
+		surNameTextBox.setColumns(10);
+		surNameTextBox.setBounds(181, 55, 96, 20);
+		contentPane.add(surNameTextBox);
+		
+		JLabel lblEnterResidence = new JLabel("Enter Residence:");
+		lblEnterResidence.setFont(new Font("Stencil", Font.PLAIN, 14));
+		lblEnterResidence.setBounds(10, 99, 175, 14);
+		contentPane.add(lblEnterResidence);
+		
+		residenceTextBox = new JTextField();
+		residenceTextBox.setColumns(10);
+		residenceTextBox.setBounds(181, 93, 96, 20);
+		contentPane.add(residenceTextBox);
+		
+		JLabel lblEnterPhoneNumber = new JLabel("Enter Phone Number:");
+		lblEnterPhoneNumber.setFont(new Font("Stencil", Font.PLAIN, 14));
+		lblEnterPhoneNumber.setBounds(10, 144, 175, 14);
+		contentPane.add(lblEnterPhoneNumber);
+		
+		phoneNumberTextBox = new JTextField();
+		phoneNumberTextBox.setColumns(10);
+		phoneNumberTextBox.setBounds(181, 138, 96, 20);
+		contentPane.add(phoneNumberTextBox);
+		
+		JLabel lblSelectTariffPlan = new JLabel("Select Tariff Plan:");
+		lblSelectTariffPlan.setFont(new Font("Stencil", Font.PLAIN, 14));
+		lblSelectTariffPlan.setBounds(10, 185, 175, 14);
+		
+		contentPane.add(lblSelectTariffPlan);
+		
+		JComboBox comboBoxTariffPlan = new JComboBox();
+		comboBoxTariffPlan.setBounds(181, 181, 231, 22);
+		// Clear the combo box before populating it
+		comboBoxTariffPlan.removeAllItems();
+
+		// Retrieve tariff plans from the JSON file using Administrator class function
+		Administrator admin = new Administrator();
+		Map<String, TariffPlan> tariffPlans = admin.loadTariffPlansFromJson("TariffPlans.json");
+
+		// Populate the combo box with tariff plan names
+		for (TariffPlan tariffPlan : tariffPlans.values()) {
+		    String item = "Name: " + tariffPlan.getName() + ", Data Connection Charges: " + tariffPlan.getDataCostPerKiloByte() +
+		            ", Call Charges: " + tariffPlan.getCallCostPerMinute() + ", SMS Charges: " + tariffPlan.getSmsCost();
+		    comboBoxTariffPlan.addItem(item);
+		}
+
+		contentPane.add(comboBoxTariffPlan);
+		
+		JButton btnSaveData = new JButton("Save Data");
+		btnSaveData.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				 String name = nameTextBox.getText().trim();
+			        String surName = surNameTextBox.getText().trim();
+			        String residence = residenceTextBox.getText().trim();
+			        String phoneNumber = phoneNumberTextBox.getText().trim();
+			        String tariffPlanString = (String) comboBoxTariffPlan.getSelectedItem();
+
+			        // Check if any field is empty
+			        if (name.isEmpty() || surName.isEmpty() || residence.isEmpty() || phoneNumber.isEmpty() || tariffPlanString == null) {
+			            JOptionPane.showMessageDialog(null, "Please fill in all fields.", "Error", JOptionPane.ERROR_MESSAGE);
+			            return;
+			        }
+			        Administrator admin = new Administrator();
+
+			        // Extract tariff plan details from the combo box item
+			        String[] parts = tariffPlanString.split(", ");
+			        String planName = parts[0].substring(6);
+			        double smsCost = Double.parseDouble(parts[1].trim());
+			        double callCostPerMinute = Double.parseDouble(parts[2].trim());
+			        double dataCostPerKiloByte = Double.parseDouble(parts[3].trim());
+			        
+			        
+
+			        // Create TariffPlan object
+			        TariffPlan tariffPlan = new TariffPlan(planName,smsCost,callCostPerMinute,dataCostPerKiloByte);
+			        
+
+
+			        // Create Subscriber object
+			        Account account = new Account(tariffPlan); // Assuming you have an Account class
+			        Subscriber subscriber = new Subscriber(name, surName, residence, phoneNumber, account);
+
+			        // Register subscriber with Administrator
+			     
+			        admin.registerSubscriber(name, surName, residence, phoneNumber, account);
+			}
+		});
+		btnSaveData.setBounds(155, 229, 115, 23);
+		contentPane.add(btnSaveData);
+	}
+}
